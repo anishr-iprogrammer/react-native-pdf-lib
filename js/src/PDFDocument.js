@@ -84,18 +84,18 @@ export default class PDFDocument {
     return this;
   }
 
-  write = () => {
+  write = async () => {
     // console.log('Creating this PDFDocument:');
     // console.log(this.document);
     if (!this.document.path) {
       return Promise.reject('PDFDocument must have a path specified!');
     }
     if (this.document.modifyPages !== undefined) {
-      return PDFLib.modifyPDF(this.document);
+      return await PDFLib.modifyPDF(this.document);
     }
     if (this.document.pages.length < 1) {
       return Promise.reject('PDFDocument must have at least one page!');
     }
-    return PDFLib.createPDF(this.document);
+    return await PDFLib.createPDF(this.document);
   }
 }
